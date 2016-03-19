@@ -1,0 +1,10 @@
+#Commentary 1
+#Commentary 2
+#Commentary 3
+
+A + B => C
+C => D
+D + C => E
+
+=AB
+?CDE
