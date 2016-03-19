@@ -6,7 +6,7 @@
 /*   By: tbalea <tbalea@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/29 21:58:36 by tbalea            #+#    #+#             */
-/*   Updated: 2016/03/16 00:18:07 by tbalea           ###   ########.fr       */
+/*   Updated: 2016/03/19 18:20:37 by tbalea           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -265,13 +265,12 @@ bool	Elems::setToTrue(Elems *elems)
 }
 
 //	*	List of operator
+//	*	*	?	TO ADD : if (!this->_state && this->_modif) -> return (false);?
 //	*	*	operator '|'
 bool	Elems::applyOR(Elems *f1, Elems *f2)
 {
 	if (f1->getState() || f2->getState())
 	{
-		if (!this->_state && this->_modif)
-			return (false);
 		this->_state = true;
 		this->_modif = true;
 	}
@@ -289,8 +288,6 @@ bool	Elems::applyXOR(Elems *f1, Elems *f2)
 {
 	if (f1->getState() != f2->getState())
 	{
-		if (!this->_state && this->_modif)
-			return (false);
 		this->_state = true;
 		this->_modif = true;
 	}
@@ -308,8 +305,6 @@ bool	Elems::applyAND(Elems *f1, Elems *f2)
 {
 	if (f1->getState() && f2->getState())
 	{
-		if (!this->_state && this->_modif)
-			return (false);
 		this->_state = true;
 		this->_modif = true;
 	}
@@ -327,8 +322,7 @@ bool	Elems::applyNEG(Elems *f, Elems *v)
 {
 	(void)v;
 
-	if ((f->getState() && this->_state)
-			|| (!f->getState() && !this->_state && this->_modif))
+	if (f->getState() && this->_state)
 		return (false);
 	if (!f->getState())
 		this->_state = true;
@@ -341,8 +335,6 @@ bool	Elems::applyIMP(Elems *f1, Elems *f2)
 {
 	if (f1->getState())
 	{
-		if (!f2->getState() && f2->getModif())
-			return (false);
 		if (!setToTrue(f2))
 			return (false);
 		f2->setModif(true);

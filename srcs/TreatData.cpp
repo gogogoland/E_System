@@ -6,7 +6,7 @@
 /*   By: tbalea <tbalea@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/06 14:24:28 by tbalea            #+#    #+#             */
-/*   Updated: 2016/03/16 02:38:27 by tbalea           ###   ########.fr       */
+/*   Updated: 2016/03/19 18:21:07 by tbalea           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,6 +199,7 @@ static bool	CheckConsistenceFacts(Elems **elm_lst, int size, bool fact)
 		{
 			tmp = elm_lst[i]->getState();
 			if (elm_lst[i]->getName() > 90)
+//			if (elm_lst[i]->getOperator() > 3)
 			{
 				if (!elm_lst[i]->applyRules())
 				{
